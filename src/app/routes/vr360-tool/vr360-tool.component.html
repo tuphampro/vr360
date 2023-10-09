@@ -1,11 +1,19 @@
 <!-- <page-header /> -->
 
-<div nz-row [nzGutter]="16">
-  <div nz-col class="gutter-row" [nzSpan]="19">
-    <div id="panorama" class="inner-box left-design-tool"></div>
+<div nz-row [nzGutter]="8">
+  <div nz-col class="gutter-row" [nzSpan]="18">
+    <!-- <div id="panorama" class="inner-box left-preview-tool"></div> -->
+    <div class="inner-box left-source-tool">
+      <div id="source-wrapper">
+        <!-- <div id="x-axis"></div>
+        <div id="y-axis"></div> -->
+        <img id="source" src="../assets/images/3.jpg" (mousemove)="onMouseMove($event)"
+          (mousedown)="onMouseDown($event)" />
+      </div>
+    </div>
   </div>
 
-  <div nz-col class="gutter-row" [nzSpan]="5">
+  <div nz-col class="gutter-row" [nzSpan]="6">
     <div class="inner-box right-design-tool">
       <nz-tabset nzType="card">
         <nz-tab *ngFor="let tab of tabs" [nzTitle]="titleTemplate">
@@ -13,13 +21,14 @@
             <span nz-icon [nzType]="tab.icon"></span>
             {{ tab.name }}
           </ng-template>
-          {{ tab.name }}
+          <div> x:{{ offsetX }}, y:{{ offsetY }} </div>
+          <div> down x:{{ mousedown_offsetX }}, down y:{{ mousedown_offsetY }} </div>
         </nz-tab>
       </nz-tabset>
 
       <div class="command">
-        <button nz-button nzType="primary">Primary Button</button>
-        <button nz-button nzType="default">Default Button</button>
+        <button nz-button nzType="primary" nzSize="default">Primary Button</button>
+        <button nz-button nzType="default" nzSize="default">Default Button</button>
       </div>
     </div>
   </div>

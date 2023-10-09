@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-vr360-tool',
@@ -7,6 +7,13 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VR360ToolComponent implements OnInit {
+  offsetX = 0;
+  offsetY = 0;
+  mousedown_offsetX = 0;
+  mousedown_offsetY = 0;
+  xAxis: ElementRef | undefined;
+  yAxis: ElementRef | undefined;
+
   tabs = [
     {
       name: 'Tab 1',
@@ -19,6 +26,9 @@ export class VR360ToolComponent implements OnInit {
   ];
 
   ngOnInit() {
+    this.xAxis = new ElementRef(document.getElementById('x-axis'));
+    this.yAxis = new ElementRef(document.getElementById('y-axis'));
+
     (window as any).pannellum.viewer('panorama', {
       default: {
         firstScene: 'circle',
@@ -92,5 +102,24 @@ export class VR360ToolComponent implements OnInit {
         }
       }
     });
+  }
+
+  onMouseMove(ev: MouseEvent) {
+    this.offsetX = ev.offsetX;
+    this.offsetY = ev.offsetY;
+
+    if (this.offsetX < 0) this.offsetX = 0;
+    if (this.offsetY < 0) this.offsetY = 0;
+
+    // this.xAxis!.nativeElement.style.top = `${this.offsetY}px`;
+    // this.xAxis!.nativeElement.style.left = 0;
+
+    // this.yAxis!.nativeElement.style.top = 0;
+    // this.yAxis!.nativeElement.style.left = `${this.offsetX}px`;
+  }
+
+  onMouseDown(ev: MouseEvent) {
+    this.mousedown_offsetX = ev.offsetX;
+    this.mousedown_offsetY = ev.offsetY;
   }
 }
