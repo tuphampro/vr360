@@ -39,21 +39,20 @@
         <img routerLink="/" class="logo" src="{{ options.logoExpanded }}" />
       </div>
       <ul style="flex: 1 1 0%" nz-menu nzTheme="dark" nzMode="horizontal">
-        <ng-container *ngFor="let item of menuData">
+        <li nz-menu-item routerLink="/" nzIcon="home"> Dashboard </li>
+
+        <li nz-menu-item routerLink="/vr360tool" nzIcon="home"> VR360 Tool </li>
+
+        <!-- <ng-container *ngFor="let item of menuData">
           <li nz-submenu nzTitle="{{ item.Name }}" nzIcon="{{ item.Icon }}">
             <ul>
-              <li
-                nz-menu-item
-                nzIcon="dashboard"
-                *ngFor="let subItem of item.listMenus"
-                [nzSelected]="isSelected(subItem.Url)"
-                routerLink="/{{ item.Url }}/{{ subItem.Url }}"
-              >
+              <li nz-menu-item nzIcon="dashboard" *ngFor="let subItem of item.listMenus"
+                [nzSelected]="isSelected(subItem.Url)" routerLink="/{{ item.Url }}/{{ subItem.Url }}">
                 {{ subItem.Name }}
               </li>
             </ul>
           </li>
-        </ng-container>
+        </ng-container> -->
       </ul>
       <div style="display: flex; align-items: center; justify-content: flex-end">
         <header-user />

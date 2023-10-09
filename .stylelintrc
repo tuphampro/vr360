@@ -13,6 +13,7 @@
     "no-descending-specificity": null,
     "plugin/declaration-block-no-ignored-properties": true,
     "selector-class-pattern": null, 
+    "no-empty-source": null, 
     "selector-type-no-unknown": [
       true,
       {
