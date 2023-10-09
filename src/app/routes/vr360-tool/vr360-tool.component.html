@@ -1,2 +1,26 @@
 <!-- <page-header /> -->
-<div id="panorama"></div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col class="gutter-row" [nzSpan]="19">
+    <div id="panorama" class="inner-box left-design-tool"></div>
+  </div>
+
+  <div nz-col class="gutter-row" [nzSpan]="5">
+    <div class="inner-box right-design-tool">
+      <nz-tabset nzType="card">
+        <nz-tab *ngFor="let tab of tabs" [nzTitle]="titleTemplate">
+          <ng-template #titleTemplate>
+            <span nz-icon [nzType]="tab.icon"></span>
+            {{ tab.name }}
+          </ng-template>
+          {{ tab.name }}
+        </nz-tab>
+      </nz-tabset>
+
+      <div class="command">
+        <button nz-button nzType="primary">Primary Button</button>
+        <button nz-button nzType="default">Default Button</button>
+      </div>
+    </div>
+  </div>
+</div>

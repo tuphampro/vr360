@@ -7,6 +7,17 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VR360ToolComponent implements OnInit {
+  tabs = [
+    {
+      name: 'Tab 1',
+      icon: 'apple'
+    },
+    {
+      name: 'Tab 2',
+      icon: 'android'
+    }
+  ];
+
   ngOnInit() {
     (window as any).pannellum.viewer('panorama', {
       default: {
@@ -15,7 +26,7 @@ export class VR360ToolComponent implements OnInit {
         sceneFadeDuration: 250
       },
       type: 'equirectangular',
-      panorama: '../assets/images/1.jpg',
+      panorama: '../assets/images/3.jpg',
       autoLoad: true,
       compass: true,
       // "pitch": 2.3,
