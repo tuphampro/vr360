@@ -1,85 +1,39 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { SettingsService, User } from '@delon/theme';
 import { LayoutDefaultOptions } from '@delon/theme/layout-default';
 import { environment } from '@env/environment';
 
 @Component({
   selector: 'layout-basic',
-  template: `
-    <layout-default [options]="options" [asideUser]="asideUserTpl" [content]="contentTpl" [customError]="null">
-      <layout-default-header-item direction="left">
-        <a layout-default-header-item-trigger href="//github.com/ng-alain/ng-alain" target="_blank">
-          <i nz-icon nzType="github"></i>
-        </a>
-      </layout-default-header-item>
-      <layout-default-header-item direction="left" hidden="mobile">
-        <a layout-default-header-item-trigger routerLink="/passport/lock">
-          <i nz-icon nzType="lock"></i>
-        </a>
-      </layout-default-header-item>
-      <layout-default-header-item direction="left" hidden="pc">
-        <div layout-default-header-item-trigger (click)="searchToggleStatus = !searchToggleStatus">
-          <i nz-icon nzType="search"></i>
-        </div>
-      </layout-default-header-item>
-      <layout-default-header-item direction="middle">
-        <header-search class="alain-default__search" [toggleChange]="searchToggleStatus />>
-      </layout-default-header-item>
-      <layout-default-header-item direction="right" hidden="mobile">
-        <div layout-default-header-item-trigger nz-dropdown [nzDropdownMenu]="settingsMenu" nzTrigger="click" nzPlacement="bottomRight">
-          <i nz-icon nzType="setting"></i>
-        </div>
-        <nz-dropdown-menu #settingsMenu="nzDropdownMenu">
-          <div nz-menu style="width: 200px;">
-            <div nz-menu-item>
-              <header-fullscree />>
-            </div>
-            <div nz-menu-item>
-              <header-clear-storag />>
-            </div>
-            <div nz-menu-item>
-              <header-i18 />>
-            </div>
-          </div>
-        </nz-dropdown-menu>
-      </layout-default-header-item>
-      <layout-default-header-item direction="right">
-        <header-use />>
-      </layout-default-header-item>
-      <ng-template #asideUserTpl>
-        <div nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu" class="alain-default__aside-user">
-          <nz-avatar class="alain-default__aside-user-avatar" [nzSrc]="user.avatar />>
-          <div class="alain-default__aside-user-info">
-            <strong>{{ user.name }}</strong>
-            <p class="mb0">{{ user.email }}</p>
-          </div>
-        </div>
-        <nz-dropdown-menu #userMenu="nzDropdownMenu">
-          <ul nz-menu>
-            <li nz-menu-item routerLink="/pro/account/center">{{ 'menu.account.center' | i18n }}</li>
-            <li nz-menu-item routerLink="/pro/account/settings">{{ 'menu.account.settings' | i18n }}</li>
-          </ul>
-        </nz-dropdown-menu>
-      </ng-template>
-      <ng-template #contentTpl>
-        <router-outle />>
-      </ng-template>
-    </layout-default>
-
-    <setting-drawer *ngIf="showSettingDrawer />>
-    <theme-bt />>
-  `
+  templateUrl: `./basic.component.html`,
+  styleUrls: [`basic.component.less`]
 })
 export class LayoutBasicComponent {
   options: LayoutDefaultOptions = {
-    logoExpanded: `./assets/logo-full.svg`,
-    logoCollapsed: `./assets/logo.svg`
+    logoExpanded: `./assets/images/panorama.png`,
+    logoCollapsed: `./assets/images/panorama.png`
   };
   searchToggleStatus = false;
   showSettingDrawer = !environment.production;
+  isCollapsed = false;
+  menuData: any[] = [];
+
   get user(): User {
     return this.settings.user;
   }
 
-  constructor(private settings: SettingsService) {}
+  constructor(
+    private settings: SettingsService,
+    private router: Router
+  ) {
+    // this.menuData = settings.user["listMenus"];
+  }
+
+  isSelected(route: string): boolean {
+    if (this.router.url.includes(route)) {
+      return true;
+    }
+    return false;
+  }
 }

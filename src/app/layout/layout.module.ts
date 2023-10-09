@@ -26,8 +26,9 @@ import { HeaderI18nComponent } from './basic/widgets/i18n.component';
 import { HeaderSearchComponent } from './basic/widgets/search.component';
 import { HeaderUserComponent } from './basic/widgets/user.component';
 import { LayoutBlankComponent } from './blank/blank.component';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
 
-const COMPONENTS = [LayoutBasicComponent, LayoutBlankComponent];
+const COMPONENTS = [LayoutBasicComponent, LayoutBlankComponent, LayoutLoginComponent];
 
 const HEADERCOMPONENTS = [
   HeaderSearchComponent,
@@ -39,6 +40,7 @@ const HEADERCOMPONENTS = [
 
 // passport
 import { LayoutPassportComponent } from './passport/passport.component';
+import { LayoutLoginComponent } from './login/login.component';
 const PASSPORT = [LayoutPassportComponent];
 
 @NgModule({
@@ -60,7 +62,8 @@ const PASSPORT = [LayoutPassportComponent];
     NzSpinModule,
     NzBadgeModule,
     NzAvatarModule,
-    NzIconModule
+    NzIconModule,
+    NzLayoutModule
   ],
   declarations: [...COMPONENTS, ...HEADERCOMPONENTS, ...PASSPORT],
   exports: [...COMPONENTS, ...PASSPORT]
