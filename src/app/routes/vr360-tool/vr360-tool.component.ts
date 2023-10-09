@@ -13,6 +13,8 @@ export class VR360ToolComponent implements OnInit {
   mousedown_offsetY = 0;
   xAxis: ElementRef | undefined;
   yAxis: ElementRef | undefined;
+  viewSource = false;
+  preview = true;
 
   tabs = [
     {
@@ -121,5 +123,14 @@ export class VR360ToolComponent implements OnInit {
   onMouseDown(ev: MouseEvent) {
     this.mousedown_offsetX = ev.offsetX;
     this.mousedown_offsetY = ev.offsetY;
+  }
+
+  onViewSource() {
+    this.viewSource = true;
+    this.preview = false;
+  }
+  onPreview() {
+    this.viewSource = false;
+    this.preview = true;
   }
 }

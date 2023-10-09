@@ -2,11 +2,11 @@
 
 <div nz-row [nzGutter]="8">
   <div nz-col class="gutter-row" [nzSpan]="18">
-    <!-- <div id="panorama" class="inner-box left-preview-tool"></div> -->
+    <div id="panorama" class="inner-box left-preview-tool" [hidden]="!preview"></div>
     <div class="inner-box left-source-tool">
-      <div id="source-wrapper">
-        <!-- <div id="x-axis"></div>
-        <div id="y-axis"></div> -->
+      <div id="source-wrapper" [hidden]="!viewSource">
+        <div id="x-axis"></div>
+        <div id="y-axis"></div>
         <img id="source" src="../assets/images/3.jpg" (mousemove)="onMouseMove($event)"
           (mousedown)="onMouseDown($event)" />
       </div>
@@ -27,8 +27,8 @@
       </nz-tabset>
 
       <div class="command">
-        <button nz-button nzType="primary" nzSize="default">Primary Button</button>
-        <button nz-button nzType="default" nzSize="default">Default Button</button>
+        <button nz-button nzType="primary" (click)="onViewSource()">Hiển thị ảnh gốc</button>
+        <button nz-button nzType="default" (click)="onPreview()">Xem trước</button>
       </div>
     </div>
   </div>
