@@ -8,14 +8,14 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
   ngOnInit() {
-    (window as any).pannellum.viewer('panoramaContainer', {
+    (window as any).pannellum.viewer('panorama', {
       default: {
         firstScene: 'circle',
         author: 'Matthew Petroff',
         sceneFadeDuration: 250
       },
       type: 'equirectangular',
-      panorama: '../assets/images/3.jpg',
+      panorama: '../assets/images/1.jpg',
       autoLoad: true,
       compass: true,
       // "pitch": 2.3,

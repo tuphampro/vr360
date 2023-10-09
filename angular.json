@@ -3,7 +3,7 @@
   "version": 1,
   "cli": {
     "packageManager": "yarn",
-    "analytics": "fd53cce8-d3a2-40da-b300-625ee838dbc2",
+    "analytics": "49cb5611-1a98-41f9-ab1e-faab300d383a",
     "schematicCollections": [
       "@schematics/angular",
       "ng-alain"
@@ -11,7 +11,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "my_vr360": {
+    "my-vr360": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -55,7 +55,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/my_vr360",
+            "outputPath": "dist/my-vr360",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -115,10 +115,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "my_vr360:build:production"
+              "browserTarget": "my-vr360:build:production"
             },
             "development": {
-              "browserTarget": "my_vr360:build:development"
+              "browserTarget": "my-vr360:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -129,7 +129,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "my_vr360:build"
+            "browserTarget": "my-vr360:build"
           }
         },
         "test": {
