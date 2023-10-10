@@ -32,8 +32,9 @@ export class VR360ToolComponent implements OnInit {
       type: 'equirectangular',
       panorama: '../assets/images/3.jpg',
       autoLoad: true,
-      compass: true
-
+      compass: true,
+      keyboardZoom: true,
+      disableKeyboardCtrl: true
       // "pitch": 2.3,
       // "yaw": -135.4,
       // "hfov": 120,
@@ -102,7 +103,7 @@ export class VR360ToolComponent implements OnInit {
 
   mouseupViewer = (event: MouseEvent) => {
     try {
-      if (!event.altKey) return;
+      if (!event.ctrlKey) return;
       // coords[0] is pitch, coords[1] is yaw
       var coords = this.pannellumViewer.mouseEventToCoords(event);
       var inputText = `pitch: ${round(coords[0], 2)}, yaw:   ${round(coords[1], 2)} `;
