@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
+import { round } from '@delon/util';
 
 @Component({
   selector: 'app-vr360-tool',
@@ -101,10 +102,10 @@ export class VR360ToolComponent implements OnInit {
 
   mouseupViewer = (event: MouseEvent) => {
     try {
-      var inputText = 'Tu Pham';
-
+      if (!event.altKey) return;
       // coords[0] is pitch, coords[1] is yaw
       var coords = this.pannellumViewer.mouseEventToCoords(event);
+      var inputText = `pitch: ${round(coords[0], 2)}, yaw:   ${round(coords[1], 2)} `;
 
       var currentPitch = coords[0];
       var currentYaw = coords[1];

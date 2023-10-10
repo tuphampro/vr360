@@ -1,0 +1,21 @@
+viewer.addHotSpot({
+    "pitch": 10,
+    "yaw": 10,
+    "type": "info",
+    "text": "some text here"
+});
+
+var myPlayer = videojs('panorama', {
+    plugins: {
+        pannellum: {
+            "hotSpots": [
+                {
+                    "pitch": 14.1,
+                    "yaw": 1.5,
+                    "type": "info",
+                    "text": "example hot spot"
+                }
+            ]
+        }
+    }
+});
