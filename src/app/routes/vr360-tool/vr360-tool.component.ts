@@ -110,9 +110,33 @@ export class VR360ToolComponent implements OnInit {
 
       var currentPitch = coords[0];
       var currentYaw = coords[1];
-      this.pannellumViewer.addHotSpot({ pitch: currentPitch, yaw: currentYaw, type: 'info', text: inputText });
+
+      this.pannellumViewer.addHotSpot({
+        pitch: currentPitch,
+        yaw: currentYaw,
+        type: 'info',
+        text: inputText,
+        cssClass: 'custom-hotspot',
+        createTooltipFunc: this.hotspot,
+        createTooltipArgs: inputText
+      });
     } catch (error) {
       console.log(error);
     }
+  };
+
+  // Hot spot creation function
+  hotspot = (hotSpotDiv: any, args: any) => {
+    var a = document.createElement('a');
+    hotSpotDiv.appendChild(a);
+
+    hotSpotDiv.classList.add('custom-tooltip');
+    var span = document.createElement('span');
+    span.innerHTML = args;
+    hotSpotDiv.appendChild(span);
+    span.style.width = `${span.scrollWidth + 20}px`;
+    span.style.padding = `${6}px`;
+    span.style.marginLeft = `${-(span.scrollWidth + 46) / 2}px`;
+    span.style.marginTop = `${-a.scrollHeight - 6}px`;
   };
 }
