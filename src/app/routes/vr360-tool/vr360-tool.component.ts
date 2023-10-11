@@ -24,79 +24,51 @@ export class VR360ToolComponent implements OnInit {
   ngOnInit() {
     this.pannellumViewer = (window as any).pannellum.viewer('panorama', {
       default: {
-        firstScene: 'circle',
         author: 'Matthew Petroff',
-        sceneFadeDuration: 250
+        sceneFadeDuration: 200,
+        firstScene: 'root'
       },
+      // dynamicUpdate: true,
+      // dynamic: true,
       hotSpotDebug: false,
-      type: 'equirectangular',
-      panorama: '../assets/images/3.jpg',
+      // type: 'equirectangular',
+      // panorama: '../assets/images/3.jpg',
       autoLoad: true,
       compass: true,
       keyboardZoom: true,
-      disableKeyboardCtrl: true
-      // "pitch": 2.3,
-      // "yaw": -135.4,
-      // "hfov": 120,
-      // "hotSpots": [
-      //   {
-      //     "pitch": 14.1,
-      //     "yaw": 1.5,
-      //     "type": "info",
-      //     "text": "Baltimore Museum of Art",
-      //     "URL": "https://artbma.org/"
-      //   },
-      //   {
-      //     "pitch": -9.4,
-      //     "yaw": 222.6,
-      //     "type": "info",
-      //     "text": "Art Museum Drive"
-      //   },
-      //   {
-      //     "pitch": -0.9,
-      //     "yaw": 144.4,
-      //     "type": "info",
-      //     "text": "North Charles Street"
-      //   }
-      // ],
-      // scenes: {
-      //   circle: {
-      //     title: 'Mason Circle',
-      //     hfov: 110,
-      //     pitch: -3,
-      //     yaw: 117,
-      //     type: 'equirectangular',
-      //     panorama: '/images/from-tree.jpg',
-      //     hotSpots: [
-      //       {
-      //         pitch: -2.1,
-      //         yaw: 132.9,
-      //         type: 'scene',
-      //         text: 'Spring House or Dairy',
-      //         sceneId: 'house'
-      //       }
-      //     ]
-      //   },
-
-      //   house: {
-      //     title: 'Spring House or Dairy',
-      //     hfov: 110,
-      //     yaw: 5,
-      //     type: 'equirectangular',
-      //     panorama: '/images/bma-0.jpg',
-      //     hotSpots: [
-      //       {
-      //         pitch: -0.6,
-      //         yaw: 37.1,
-      //         type: 'scene',
-      //         text: 'Mason Circle',
-      //         sceneId: 'circle',
-      //         targetYaw: -23,
-      //         targetPitch: 2
-      //       }
-      //     ]
-      //   }
-      // }
+      disableKeyboardCtrl: true,
+      scenes: {
+        root: {
+          title: 'Mason Circle',
+          type: 'equirectangular',
+          panorama: '../assets/images/1.jpg',
+          hotSpots: [
+            // {
+            //   "pitch": 14.1,
+            //   "yaw": 1.5,
+            //   "type": "info",
+            //   "text": "Baltimore Museum of Art",
+            // },
+            {
+              type: 'scene',
+              text: 'Spring House or Dairy',
+              sceneId: 'house'
+            }
+          ]
+        },
+        house: {
+          title: 'Spring House or Dairy',
+          type: 'equirectangular',
+          panorama: '../assets/images/2.jpg',
+          hotSpots: [
+            {
+              type: 'scene',
+              text: 'Mason Circle',
+              sceneId: 'root'
+            }
+          ]
+        }
+      }
     });
     this.pannellumViewer.on('mouseup', this.mouseupViewer);
   }
@@ -111,6 +83,22 @@ export class VR360ToolComponent implements OnInit {
       var currentPitch = coords[0];
       var currentYaw = coords[1];
 
+      console.log(this.pannellumViewer.getScene());
+      // this.pannellumViewer.addScene(
+      //   'house', {
+      //   title: "New Scene",
+      //   type: "equirectangular",
+      //   autoload: true,
+      //   panorama: '../assets/images/1.jpg',
+      //   "hotSpots": [
+      //     {
+      //       "type": "scene",
+      //       "text": "New Scene",
+      //       "sceneId": "house"
+      //     }
+      //   ]
+      // });
+
       this.pannellumViewer.addHotSpot({
         pitch: currentPitch,
         yaw: currentYaw,
@@ -120,6 +108,11 @@ export class VR360ToolComponent implements OnInit {
         createTooltipFunc: this.hotspot,
         createTooltipArgs: inputText
       });
+
+      // this.pannellumViewer.setUpdate(true);
+      // this.pannellumViewer.loadScene('circle');
+
+      console.log(this.pannellumViewer.getConfig().scenes);
     } catch (error) {
       console.log(error);
     }
