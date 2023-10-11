@@ -9,6 +9,31 @@
     <div class="inner-box right-design-tool">
       <nz-tabset nzType="card">
         <nz-tab *ngFor="let tab of tabs" [nzTitle]="titleTemplate">
+          <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+            <nz-form-item>
+              <nz-form-label [nzSpan]="5" nzFor="gender" nzRequired>Loại</nz-form-label>
+              <nz-form-control [nzSpan]="12" nzErrorTip="Vui lòng chọn!">
+                <nz-select id="gender" formControlName="gender" nzPlaceHolder="Vui lòng chọn" (ngModelChange)="genderChange($event)">
+                  <nz-option nzValue="info" nzLabel="info" />
+                  <nz-option nzValue="scene" nzLabel="scene" />
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label [nzSpan]="5" nzRequired nzFor="note">Nội dung</nz-form-label>
+              <nz-form-control [nzSpan]="12" nzErrorTip="Please input your username!">
+                <input id="note" type="text" nz-input formControlName="note" />
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-control [nzSpan]="12" [nzOffset]="5">
+                <button nz-button nzType="primary">Submit</button>
+              </nz-form-control>
+            </nz-form-item>
+          </form>
+
           <b>Scenes:</b>
           <div *ngFor="let item of scenes | keyvalue">
             {{ item.key }}
@@ -25,10 +50,6 @@
           </ng-template>
         </nz-tab>
       </nz-tabset>
-
-      <div class="command">
-        <button nz-button nzType="primary">Lưu</button>
-      </div>
     </div>
   </div>
 </div>

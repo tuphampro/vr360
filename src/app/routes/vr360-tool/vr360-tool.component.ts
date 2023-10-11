@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { round } from '@delon/util';
 
 @Component({
@@ -14,14 +15,37 @@ export class VR360ToolComponent implements OnInit {
 
   tabs = [
     {
-      name: 'Tab 1',
-      icon: 'apple'
-    },
-    {
-      name: 'Tab 2',
-      icon: 'android'
+      name: 'Thiết kế',
+      icon: 'edit'
     }
   ];
+
+  validateForm: FormGroup<{
+    note: FormControl<string | null>;
+    gender: FormControl<'info' | 'info' | null>;
+  }> = this.fb.group({
+    note: this.fb.control<string | null>(null, Validators.required),
+    gender: this.fb.control<'info' | 'info' | null>(null, Validators.required)
+  });
+
+  submitForm(): void {
+    if (this.validateForm.valid) {
+      console.log('submit', this.validateForm.value);
+    } else {
+      Object.values(this.validateForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
+  }
+
+  genderChange(value: string): void {
+    this.validateForm.controls.note.setValue(value === 'info' ? 'Hi, man!' : 'Hi, lady!');
+  }
+
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.pannellumViewer = (window as any).pannellum.viewer('panorama', {
