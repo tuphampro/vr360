@@ -19,3 +19,13 @@ var myPlayer = videojs('panorama', {
         }
     }
 });
+
+  // this.pannellumViewer.addHotSpot({
+      //   pitch: currentPitch,
+      //   yaw: currentYaw,
+      //   type: 'info',
+      //   text: inputText,
+      //   cssClass: 'custom-hotspot',
+      //   createTooltipFunc: this.hotspot,
+      //   createTooltipArgs: inputText
+      // });

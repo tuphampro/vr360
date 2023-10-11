@@ -9,6 +9,16 @@
     <div class="inner-box right-design-tool">
       <nz-tabset nzType="card">
         <nz-tab *ngFor="let tab of tabs" [nzTitle]="titleTemplate">
+          <b>Scenes:</b>
+          <div *ngFor="let item of scenes | keyvalue">
+            {{ item.key }}
+          </div>
+          <br />
+          <b>Hotpots:</b>
+          <div *ngFor="let item of hotSpots">
+            {{ item.text }}
+          </div>
+
           <ng-template #titleTemplate>
             <span nz-icon [nzType]="tab.icon"></span>
             {{ tab.name }}

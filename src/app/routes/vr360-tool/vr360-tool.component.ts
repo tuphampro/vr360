@@ -5,10 +5,12 @@ import { round } from '@delon/util';
   selector: 'app-vr360-tool',
   templateUrl: './vr360-tool.component.html',
   styleUrls: ['./vr360-tool.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class VR360ToolComponent implements OnInit {
   pannellumViewer: any;
+  scenes: any;
+  hotSpots: any;
 
   tabs = [
     {
@@ -25,7 +27,7 @@ export class VR360ToolComponent implements OnInit {
     this.pannellumViewer = (window as any).pannellum.viewer('panorama', {
       default: {
         author: 'Matthew Petroff',
-        sceneFadeDuration: 200,
+        sceneFadeDuration: 0,
         firstScene: 'root'
       },
       // dynamicUpdate: true,
@@ -76,14 +78,13 @@ export class VR360ToolComponent implements OnInit {
   mouseupViewer = (event: MouseEvent) => {
     try {
       if (!event.ctrlKey) return;
-      // coords[0] is pitch, coords[1] is yaw
+
       var coords = this.pannellumViewer.mouseEventToCoords(event);
       var inputText = `pitch: ${round(coords[0], 2)}, yaw:   ${round(coords[1], 2)} `;
 
       var currentPitch = coords[0];
       var currentYaw = coords[1];
 
-      console.log(this.pannellumViewer.getScene());
       // this.pannellumViewer.addScene(
       //   'house', {
       //   title: "New Scene",
@@ -99,6 +100,9 @@ export class VR360ToolComponent implements OnInit {
       //   ]
       // });
 
+      this.scenes = this.pannellumViewer.getConfig().scenes;
+      this.hotSpots = this.pannellumViewer.getConfig().hotSpots;
+
       this.pannellumViewer.addHotSpot({
         pitch: currentPitch,
         yaw: currentYaw,
@@ -109,10 +113,7 @@ export class VR360ToolComponent implements OnInit {
         createTooltipArgs: inputText
       });
 
-      // this.pannellumViewer.setUpdate(true);
-      // this.pannellumViewer.loadScene('circle');
-
-      console.log(this.pannellumViewer.getConfig().scenes);
+      console.log(this.scenes);
     } catch (error) {
       console.log(error);
     }
